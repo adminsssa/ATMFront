@@ -1,0 +1,92 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    background: url("../assets/bc.png");
+    font-family: sans-serif;
+    background-size: cover;
+}
+#Frame{
+    height: 99vh;
+    width: 100vw;
+    display : flex;
+    item-center : center;
+    border:1px solid rgba(0,0,0,0);
+}
+#title{
+    height: 20vh;
+    width: 100vw;
+    display : flex;
+    item-center : center;
+}
+#first
+{
+    height: 20vh;
+    width: 100vw;
+    display : flex;
+    item-center : center;
+}
+#second
+{
+    height: 20vh;
+    width: 100vw;
+    display : flex;
+    item-center : center;
+}
+#third
+{
+    height: 20vh;
+    width: 100vw;
+    display : flex;
+    item-center : center;
+}
+#prompt
+{
+    height: 20vh;
+    width: 100vw;
+    display : flex;
+    item-center : center;
+}
+#title_im{
+    margin-left: 450px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,100);
+    font: italic bold 40px/40px Georgia, serif;
+}
+#saveBut {
+    margin-top: 42px;
+    margin-left: 182px;
+    box-shadow: 0 15px 25px rgba(0,0,0,100);
+}
+#takeBut{
+    margin-top: 42px;
+    margin-left: 360px;
+    box-shadow: 0 15px 25px rgba(0,0,0,100);
+}
+#historyBut{
+    margin-top: 42px;
+    margin-left: 182px;
+    box-shadow: 0 15px 25px rgba(0,0,0,100);
+}
+#queryBut{
+    margin-top: 42px;
+    margin-left: 360px;
+    box-shadow: 0 15px 25px rgba(0,0,0,100);
+}
+#cancellation{
+    margin-top: 42px;
+    margin-left: 1128px;
+}
+#prompt_text{
+    height: 10vh;
+    width: 100vw;
+    margin-top: 10vh;
+    background-color: rgba(0,0,0,0);
+    border: none;
+    color: red;
+}
+#index{
+    margin-top: 5vh;
+    height: 50vh;
+    width: 47vw;
+    margin-left: 52vh;
+}

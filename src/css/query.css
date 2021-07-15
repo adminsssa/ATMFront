@@ -1,0 +1,52 @@
+#queryFrame{
+    height: 40vh;
+    width: 40vw;
+    margin-top: 30px;
+    margin-left: 50px;
+}
+#queryLayout2{
+    height: 15vh;
+    width: 40vw;
+    display: inline-block;
+}
+#queryLayout3{
+    height: 12vh;
+    width: 40vw;
+}
+#queryInput{
+    margin-top: 20px;
+    height: 80px;
+    width: 20vw;
+    float: left;
+    margin-left: 10vw;
+    font-size:30px;
+    color: black;
+    opacity: 0.7;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 15px 25px limegreen;
+    border: none;
+}
+#queryPrompt{
+    text-align: center;
+}
+#queryBut1{
+    width: 150px;
+    height: 50px;
+    box-shadow: 0 15px 25px limegreen;
+    margin-left: 150px;
+}
+#queryBut2{
+    width: 150px;
+    height: 50px;
+    margin-left: 15px;
+    box-shadow: 0 15px 25px orangered;
+}
+#yuan{
+    margin-top: 40px;
+    height: 12vh;
+    width: 5vw;
+    margin-right: 60px;
+    float: right;
+    font-size: 30px;
+}

@@ -24,7 +24,8 @@
             <td colspan="2">
               <!-- 点击事件的两种不同的写法v-on:click和 @click-->
               <!--<el-button style="width: 300px" type="primary" v-on:click="doLogin">登录</el-button>-->
-              <el-button id="loginButton" style="width: 200px" type="primary" @click="doLogin">登录</el-button>
+              <el-button id="loginButton" style="width: 100px" type="primary" @click="doLogin">登录</el-button>
+              <el-button id="enrollButton" style="width: 100px" type="success" @click="doenroll">注册</el-button>
             </td>
           </tr>
         </table>
@@ -51,7 +52,12 @@ export default {
   methods:{
     doLogin(){//一点击登录按钮，这个方法就会执行
       /*alert(JSON.stringify(this.user))//可以直接把this.user对象传给后端进行校验用户名和密码*/
-      this.$router.push("/homepage")
+/*      this.$router.push("/homepage")*/
+      this.$router.replace({path:'/homepage'})
+    },
+    doenroll(){
+      this.$router.push("/Enroll")
+
     }
   },
   name: "Login"

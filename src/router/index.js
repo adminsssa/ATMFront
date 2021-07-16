@@ -7,6 +7,8 @@ import Cancellation from "../views/Cancellation";
 import Login from "../components/Login";
 import HomePage from "../components/HomePage";
 import Home from "../views/Home";
+import Enroll from "../views/Enroll";
+import History from "../views/History";
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,6 +23,11 @@ const routes = [
     component: Login
   },
   {
+    path: '/Enroll',
+    name: 'Enroll',
+    component: Enroll
+  },
+  {
     path: '/homepage',
     name: 'HomePage',
     component: HomePage,
@@ -29,6 +36,11 @@ const routes = [
       path: '/Cancellation',
       name: 'Cancellation',
       component: Cancellation
+    },
+    {
+      path: '/History',
+      name: 'History',
+      component: History
     },
     {
       path: '/save',

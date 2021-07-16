@@ -17,7 +17,7 @@
     </el-row>
     <el-row id="second">
       <el-col id="history">
-        <el-button id="historyBut" type="info" style="width: 200px; height:60px" plain @click="">历史记录</el-button>
+        <el-button id="historyBut" type="info" style="width: 200px; height:60px" plain @click="goHistory">历史记录</el-button>
       </el-col>
       <el-col id="query">
         <el-button id="queryBut" type="success" style="width: 200px; height:60px" plain @click="goQuery">查询余额</el-button>
@@ -55,6 +55,9 @@ export default {
       },
      goCancellation(){
        this.$router.replace({path:'/Cancellation'})
+     },
+     goHistory(){
+       this.$router.replace({path:'/History'})
      }
   }
 }

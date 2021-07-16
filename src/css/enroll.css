@@ -1,0 +1,65 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    background: url("../assets/bc.png");
+    font-family: sans-serif;
+    background-size: cover;
+}
+#enrollFrame{
+    height: 99vh;
+    width: 100vw;
+    display : flex;
+    item-center : center;
+    border:1px solid rgba(0,0,0,0);
+}
+#titlez{
+    height: 20vh;
+    width: 100vw;
+    display : flex;
+    item-center : center;
+}
+#title_imz{
+    margin-left: 550px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,100);
+    font: italic bold 40px/40px Georgia, serif;
+}
+#firstE{
+ margin-left: 580px;
+text-shadow: 2px 2px 5px rgba(0,0,0,100);
+}
+#secondE{
+  margin-left: 580px;
+    margin-top: 13px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,100);
+}
+#thirdE{
+    margin-left: 580px;
+    margin-top: 13px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,100);
+}
+#fourthE{
+    margin-left: 580px;
+    margin-top: 13px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,100);
+}
+#fifthE{
+    margin-left: 580px;
+    margin-top: 13px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,100);
+}
+#sixthE{
+    margin-left: 580px;
+    margin-top: 13px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,100);
+}
+#seventhE{
+    margin-left: 580px;
+    margin-top: 13px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,100);
+}
+#eighthE{
+    margin-left: 580px;
+    margin-top: 13px;
+    text-shadow: 2px 2px 5px rgba(0,0,0,100);
+}

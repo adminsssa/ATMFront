@@ -41,11 +41,13 @@ body{
     font-size: 20px;
     margin-left: 20px;
     text-align: right;
+    color: black;
 }
 #password{
     font-size: 20px;
     margin-left: 20px;
     text-align: right;
+    color: black;
 }
 #passwordInput{
     margin-right: 40px;

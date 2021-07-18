@@ -1,58 +1,71 @@
 <template>
   <div id="historyFrame">
-    <el-menu-from>
-      <el-row id="history1">
-        <h4>您的历史记录为</h4>
-      </el-row>
-      <el-row id="history2">
-        <el-input id="input2" v-model="input1" disabled></el-input>
-      </el-row>
-      <el-row id="history3">
-        <el-input id="input3" v-model="input2" disabled></el-input>
-      </el-row>
-      <el-row id="history4">
-        <el-input id="input4" v-model="input3" disabled></el-input>
-      </el-row>
-      <el-row id="history5">
-        <el-input id="input5" v-model="input4" disabled></el-input>
-      </el-row>
-      <el-row id="history6">
-        <el-input id="input6" v-model="input5" disabled></el-input>
-      </el-row>
-      <el-row id="history7">
-        <div class="block">
-          <el-pagination
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :page-size="100"
-              layout="prev, pager, next, jumper"
-              :total="1000">
-          </el-pagination>
-        </div>
-      </el-row>
-    </el-menu-from>
+    <el-breadcrumb>
+      <el-breadcrumb-item><i class="el-icon-date"></i>历史信息</el-breadcrumb-item>
+    </el-breadcrumb>
+    <div class="cantainer">
+      <el-table style="width: 100%;" :data="dealList.slice((currentPage-1)*pageSize,currentPage*pageSize)">
+        <el-table-column type="index" width="120">
+        </el-table-column>
+        <el-table-column label="交易金额" prop="transMoney" width="120">
+        </el-table-column>
+        <el-table-column label="交易状态" prop="transType" width="120">
+        </el-table-column>
+        <el-table-column label="交易时间" prop="transDate" width="120">
+        </el-table-column>
+        <el-table-column label="是否成功" prop="isSuccess" width="120">
+        </el-table-column>
+      </el-table>
+      <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentPage"
+          :page-sizes="[5,10,20,40]"
+          :page-size="pageSize"
+          layout="total,sizes,prev,pager,next,jumper"
+          total="userList.length">
+      </el-pagination>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "History",
   methods: {
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+    handleSizeChange: function (size) {
+      this.pageSize = size;
+      console.log(this.pageSize)
     },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+    handleCurrentChange: function (currentPage) {
+      this.currentPage = currentPage;
+      console.log(this.currentPage)
+    },
+    handleDealList() {
+      axios({
+        method: 'post',
+        url: 'http://localhost:8081/dealInfo/HisoricalAll',
+        params: {
+          cardId: localStorage.getItem("cardId")
+        },
+        headers: {
+          "satoken": localStorage.getItem("tokenValue")
+        }
+      }).then(res => {
+        this.dealList = res.data.data
+      })
     }
+  },
+  mounted() {
+    this.handleDealList()
   },
   data() {
     return {
-      input1:"您于2021年7月17日,取款金额为500(-)",
-      input2:"您于2021年5月27日,存款金额为5000(+)",
-      input3:"您于2021年4月42日,取款金额为500(-)",
-      input4:"您于2021年2月11日,取款金额为500(-)",
-      input5:"您于2020年1月17日,取款金额为500(-)",
-
+      currentPage: 1,
+      pageSize: 5,
+      dealList: []
     };
   }
 }

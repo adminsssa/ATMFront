@@ -2,45 +2,48 @@
   <el-mentfrom id="A"
                :model="user" :rules="rules2"
                status-icon
-               ref="ruleForm2" >
+               ref="ruleForm2">
     <div id="B">
       <div id="B1">Login</div>
-        <table id="B2">
-          <tr>
-            <td id="username" style="width: 100px">用户名:</td>
-            <td>
-              <el-input id="usernameInput" v-model="user.username" placeholder="请输入用户名"></el-input>
-            </td>
-          </tr>
-          <tr>
-            <td id="password" style="width: 100px">密码:</td>
-            <td>
-              <el-input id="passwordInput" type="password" v-model="user.password" placeholder="请输入密码" @keydown.enter.native="doLogin"></el-input>
-              <!-- @keydown.enter.native="doLogin"当按下enter键的时候也会执行doLogin方法-->
-            </td>
-          </tr>
-          <tr>
-            <!-- 占两行-->
-            <td colspan="2">
-              <!-- 点击事件的两种不同的写法v-on:click和 @click-->
-              <!--<el-button style="width: 300px" type="primary" v-on:click="doLogin">登录</el-button>-->
-              <el-button id="loginButton" style="width: 100px" type="primary" @click="doLogin">登录</el-button>
-              <el-button id="enrollButton" style="width: 100px" type="success" @click="doenroll">注册</el-button>
-            </td>
-          </tr>
-        </table>
-      </div>
+      <table id="B2">
+        <tr>
+          <td id="username" style="width: 100px">用户名:</td>
+          <td>
+            <el-input id="usernameInput" v-model="user.username" placeholder="请输入用户名"></el-input>
+          </td>
+        </tr>
+        <tr>
+          <td id="password" style="width: 100px">密码:</td>
+          <td>
+            <el-input id="passwordInput" type="password" v-model="user.password" placeholder="请输入密码"
+                      @keydown.enter.native="doLogin"></el-input>
+            <!-- @keydown.enter.native="doLogin"当按下enter键的时候也会执行doLogin方法-->
+          </td>
+        </tr>
+        <tr>
+          <!-- 占两行-->
+          <td colspan="2">
+            <!-- 点击事件的两种不同的写法v-on:click和 @click-->
+            <!--<el-button style="width: 300px" type="primary" v-on:click="doLogin">登录</el-button>-->
+            <el-button id="loginButton" style="width: 100px" type="primary" @click="doLogin">登录</el-button>
+            <el-button id="enrollButton" style="width: 100px" type="success" @click="doenroll">注册</el-button>
+          </td>
+        </tr>
+      </table>
+    </div>
   </el-mentfrom>
 
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
-      user:{
-        username:'',
-        password:'',
+      user: {
+        username: '',
+        password: '',
         //为了登录方便，可以直接在这里写好用户名和密码的值
       },
       rules2: {
@@ -49,13 +52,41 @@ export default {
       },
     }
   },
-  methods:{
-    doLogin(){//一点击登录按钮，这个方法就会执行
-      /*alert(JSON.stringify(this.user))//可以直接把this.user对象传给后端进行校验用户名和密码*/
-/*      this.$router.push("/homepage")*/
-      this.$router.replace({path:'/homepage'})
+  methods: {
+    doLogin() {//一点击登录按钮，这个方法就会执行
+      let username = this.user.username;
+      let password = this.user.password;
+      console.log(username)
+      if (username === "") {
+        this.$message.error("请输入银行卡号！");
+      } else {
+        if (password === "") {
+          this.$message.error("请输入密码！");
+        } else {
+          axios({
+            method: 'get',
+            url: 'http://localhost:8081/logininfo/userLogin',
+            params: {
+              cardId: username, password: password
+            }
+          }).then(res => {
+            if (res.data.success) {
+              this.$message({
+                message: '登录成功',
+                type: 'success'
+              });
+              localStorage.setItem("cardId", username);
+              localStorage.setItem("tokenValue", res.data.data.tokenValue);
+              this.$router.replace({path: '/homepage'});
+            } else {
+              this.$message.error(res.data.msg);
+            }
+          })
+        }
+      }
+
     },
-    doenroll(){
+    doenroll() {
       this.$router.push("/Enroll")
 
     }
@@ -66,6 +97,7 @@ export default {
 
 <style scoped>
 @import "../css/login.css";
+
 /*#A{
 background-image: url("../assets/bc.png");
 }*/

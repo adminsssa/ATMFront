@@ -6,10 +6,13 @@
       </el-row>
       <el-row id="cancellationLayout3">
         <el-col id="cancellationBut1">
-          <el-button type="success" icon="el-icon-success" style="width: 150px;height: 50px" @click="goLogin">确定</el-button>
+          <el-button type="success" icon="el-icon-success" style="width: 150px;height: 50px" @click="goLogin">确定
+          </el-button>
         </el-col>
         <el-col id="cancellationBut2">
-          <el-button type="danger" icon="el-icon-circle-close" style="width: 150px;height: 50px" v-on:click="shutdown" >取消</el-button>
+          <el-button type="danger" icon="el-icon-circle-close" style="width: 150px;height: 50px" v-on:click="shutdown">
+            取消
+          </el-button>
         </el-col>
       </el-row>
     </el-menu-form>
@@ -17,25 +20,46 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Cancellation",
   data() {
-    return {
-    }
+    return {}
   },
-  methods:{
-    goLogin(){
+  methods: {
+    goLogin() {
+      let tokenValue = localStorage.getItem("tokenValue")
+      axios({
+        method: 'get',
+        url: "http://localhost:8081/logininfo/userLogout",
+        params: {
+          cardId: localStorage.getItem("cardId"),
+          token: tokenValue
+        },
+        headers: {
+          "satoken": tokenValue
+        }
+      }).then(res => {
+        if (res.data.success) {
+          localStorage.setItem("cardId", null);
+          localStorage.setItem("tokenValue", null);
+          this.$router.replace({path: '/'});
+          this.$message({
+            message: '注销成功',
+            type: 'success'
+          });
+        } else {
+          this.$message.error(res.data.msg);
+        }
+      })
       /* document.onclick = function () {
          document.getElementById('index').style.display = 'none'
          } 关闭Div*/
-      window.location.href = 'http://localhost:8080'//跳转页面
+      // window.location.href = 'http://localhost:8080'//跳转页面
     },
-    shutdown(){
-
-      let routeData = this.$router.resolve({
-        path: `homepage`,
-      });
-      window.open(routeData.href,  'http://localhost:8080/homepage');
+    shutdown() {
+      this.$router.replace({path: '/homepage'});
     }
   }
 }

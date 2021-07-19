@@ -37,25 +37,38 @@ export default {
 
     deposit() {
       axios({
-        method: 'post',
-        url: 'http://localhost:8081/dealInfo/Deposit',
+        method: 'get',
+        url: 'http://localhost:8081/logininfo/isLogin',
         params: {
-          cardId: localStorage.getItem("cardId"),
-          transMoney: this.input
-        },
-        headers: {
-          "satoken": localStorage.getItem("tokenValue")
+          tokenValue: localStorage.getItem("tokenValue")
         }
-      }).then(res => {
-        if (res.data.success) {
-          this.$alert('存款成功', '消息提示', {
-            confirmButtonText: '确定',
-            callback: action => {
-              this.$router.replace({path: '/homepage'})
+      }).then(login => {
+        if (login.data.success) {
+          axios({
+            method: 'post',
+            url: 'http://localhost:8081/dealInfo/Deposit',
+            params: {
+              cardId: localStorage.getItem("cardId"),
+              transMoney: this.input
+            },
+            headers: {
+              "satoken": localStorage.getItem("tokenValue")
             }
-          });
+          }).then(res => {
+            if (res.data.success) {
+              this.$alert('存款成功', '消息提示', {
+                confirmButtonText: '确定',
+                callback: action => {
+                  this.$router.replace({path: '/homepage'})
+                }
+              });
+            } else {
+              this.$message.error(res.data.msg);
+            }
+          })
         } else {
-          this.$message.error(res.data.msg);
+          this.$message.error("登录已过期，请重新登录");
+          this.$router.replace({path: '/'})
         }
       })
     },

@@ -32,31 +32,40 @@ export default {
       let tokenValue = localStorage.getItem("tokenValue")
       axios({
         method: 'get',
-        url: "http://localhost:8081/logininfo/userLogout",
+        url: 'http://localhost:8081/logininfo/isLogin',
         params: {
-          cardId: localStorage.getItem("cardId"),
-          token: tokenValue
-        },
-        headers: {
-          "satoken": tokenValue
+          tokenValue: localStorage.getItem("tokenValue")
         }
-      }).then(res => {
-        if (res.data.success) {
-          localStorage.setItem("cardId", null);
-          localStorage.setItem("tokenValue", null);
-          this.$router.replace({path: '/'});
-          this.$message({
-            message: '注销成功',
-            type: 'success'
-          });
+      }).then(login => {
+        if (login.data.success) {
+          axios({
+            method: 'get',
+            url: "http://localhost:8081/logininfo/userLogout",
+            params: {
+              cardId: localStorage.getItem("cardId"),
+              token: tokenValue
+            },
+            headers: {
+              "satoken": tokenValue
+            }
+          }).then(res => {
+            if (res.data.success) {
+              localStorage.setItem("cardId", null);
+              localStorage.setItem("tokenValue", null);
+              this.$router.replace({path: '/'});
+              this.$message({
+                message: '注销成功',
+                type: 'success'
+              });
+            } else {
+              this.$message.error(res.data.msg);
+            }
+          })
         } else {
-          this.$message.error(res.data.msg);
+          this.$message.success("注销成功");
+          this.$router.replace({path: '/'})
         }
       })
-      /* document.onclick = function () {
-         document.getElementById('index').style.display = 'none'
-         } 关闭Div*/
-      // window.location.href = 'http://localhost:8080'//跳转页面
     },
     shutdown() {
       this.$router.replace({path: '/homepage'});

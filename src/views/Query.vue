@@ -10,7 +10,8 @@
       </el-row>
       <el-row id="queryLayout3">
         <el-col id="queryBut1">
-          <el-button type="success" icon="el-icon-success" style="width: 150px;height: 50px" v-on:click="shutdown">确定</el-button>
+          <el-button type="success" icon="el-icon-success" style="width: 150px;height: 50px" v-on:click="shutdown">确定
+          </el-button>
         </el-col>
         <el-col id="queryBut2">
           <el-button type="danger" icon="el-icon-circle-close" style="width: 150px;height: 50px" v-on:click="shutdown">
@@ -38,16 +39,29 @@ export default {
   methods: {
     query() {
       axios({
-        method: 'post',
-        url: "http://localhost:8081/cardInfo/Query",
+        method: 'get',
+        url: 'http://localhost:8081/logininfo/isLogin',
         params: {
-          cardNo: localStorage.getItem("cardId")
-        },
-        headers: {
-          "satoken": localStorage.getItem("tokenValue")
+          tokenValue: localStorage.getItem("tokenValue")
         }
-      }).then(res =>{
-        this.input = res.data.data.balance
+      }).then(login => {
+        if (login.data.success) {
+          axios({
+            method: 'post',
+            url: "http://localhost:8081/cardInfo/Query",
+            params: {
+              cardNo: localStorage.getItem("cardId")
+            },
+            headers: {
+              "satoken": localStorage.getItem("tokenValue")
+            }
+          }).then(res => {
+            this.input = res.data.data.balance
+          })
+        } else {
+          this.$message.error("登录已过期，请重新登录");
+          this.$router.replace({path: '/'})
+        }
       })
     },
     shutdown() {

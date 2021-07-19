@@ -56,7 +56,6 @@ export default {
     doLogin() {//一点击登录按钮，这个方法就会执行
       let username = this.user.username;
       let password = this.user.password;
-      console.log(username)
       if (username === "") {
         this.$message.error("请输入银行卡号！");
       } else {
@@ -70,6 +69,7 @@ export default {
               cardId: username, password: password
             }
           }).then(res => {
+            console.log(res)
             if (res.data.success) {
               this.$message({
                 message: '登录成功',

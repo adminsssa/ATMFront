@@ -45,16 +45,29 @@ export default {
     },
     handleDealList() {
       axios({
-        method: 'post',
-        url: 'http://localhost:8081/dealInfo/HisoricalAll',
+        method: 'get',
+        url: 'http://localhost:8081/logininfo/isLogin',
         params: {
-          cardId: localStorage.getItem("cardId")
-        },
-        headers: {
-          "satoken": localStorage.getItem("tokenValue")
+          tokenValue: localStorage.getItem("tokenValue")
         }
-      }).then(res => {
-        this.dealList = res.data.data
+      }).then(login => {
+        if (login.data.success) {
+          axios({
+            method: 'post',
+            url: 'http://localhost:8081/dealInfo/HisoricalAll',
+            params: {
+              cardId: localStorage.getItem("cardId")
+            },
+            headers: {
+              "satoken": localStorage.getItem("tokenValue")
+            }
+          }).then(res => {
+            this.dealList = res.data.data
+          })
+        } else {
+          this.$message.error("登录已过期，请重新登录");
+          this.$router.replace({path: '/'})
+        }
       })
     }
   },

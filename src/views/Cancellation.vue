@@ -21,6 +21,7 @@
 
 <script>
 import axios from "axios";
+import {isLogin, userLogout} from "../api/LoginInfo";
 
 export default {
   name: "Cancellation",
@@ -30,25 +31,9 @@ export default {
   methods: {
     goLogin() {
       let tokenValue = localStorage.getItem("tokenValue")
-      axios({
-        method: 'get',
-        url: 'http://localhost:8081/logininfo/isLogin',
-        params: {
-          tokenValue: localStorage.getItem("tokenValue")
-        }
-      }).then(login => {
+      isLogin(tokenValue).then(login => {
         if (login.data.success) {
-          axios({
-            method: 'get',
-            url: "http://localhost:8081/logininfo/userLogout",
-            params: {
-              cardId: localStorage.getItem("cardId"),
-              token: tokenValue
-            },
-            headers: {
-              "satoken": tokenValue
-            }
-          }).then(res => {
+          userLogout(localStorage.getItem("cardId"), tokenValue).then(res => {
             if (res.data.success) {
               localStorage.setItem("cardId", null);
               localStorage.setItem("tokenValue", null);

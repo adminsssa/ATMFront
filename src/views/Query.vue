@@ -25,6 +25,8 @@
 
 <script>
 import axios from "axios";
+import {isLogin} from "../api/LoginInfo";
+import {query} from "../api/CardInfo";
 
 export default {
   name: "Query",
@@ -38,24 +40,9 @@ export default {
   },
   methods: {
     query() {
-      axios({
-        method: 'get',
-        url: 'http://localhost:8081/logininfo/isLogin',
-        params: {
-          tokenValue: localStorage.getItem("tokenValue")
-        }
-      }).then(login => {
+      isLogin(localStorage.getItem("tokenValue")).then(login => {
         if (login.data.success) {
-          axios({
-            method: 'post',
-            url: "http://localhost:8081/cardInfo/Query",
-            params: {
-              cardNo: localStorage.getItem("cardId")
-            },
-            headers: {
-              "satoken": localStorage.getItem("tokenValue")
-            }
-          }).then(res => {
+          query(localStorage.getItem("cardId"), localStorage.getItem("tokenValue")).then(res => {
             this.input = res.data.data.balance
           })
         } else {

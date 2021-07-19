@@ -34,6 +34,7 @@
 
 <script>
 import axios from "axios";
+import {userRegister} from "../api/UserInfo";
 
 export default {
   name: "Enroll",
@@ -44,11 +45,7 @@ export default {
   },
   methods: {
     userRegister() {
-      axios({
-        method: 'post',
-        url: 'http://localhost:8081/registerInfo/userRegister',
-        data: this.registerForm
-      }).then(res => {
+      userRegister(this.registerForm).then(res => {
         if (res.data.success) {
           this.$message({
             message: '注册成功',

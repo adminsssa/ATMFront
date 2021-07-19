@@ -37,6 +37,7 @@
 
 <script>
 import axios from "axios";
+import {loginInfo} from "../api/LoginInfo";
 
 export default {
   data() {
@@ -62,13 +63,7 @@ export default {
         if (password === "") {
           this.$message.error("请输入密码！");
         } else {
-          axios({
-            method: 'get',
-            url: 'http://localhost:8081/logininfo/userLogin',
-            params: {
-              cardId: username, password: password
-            }
-          }).then(res => {
+          loginInfo(username, password).then(res => {
             console.log(res)
             if (res.data.success) {
               this.$message({

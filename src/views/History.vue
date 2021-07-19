@@ -31,6 +31,8 @@
 
 <script>
 import axios from "axios";
+import {isLogin} from "../api/LoginInfo";
+import {hisoricalAll} from "../api/DealInfo";
 
 export default {
   name: "History",
@@ -44,24 +46,9 @@ export default {
       console.log(this.currentPage)
     },
     handleDealList() {
-      axios({
-        method: 'get',
-        url: 'http://localhost:8081/logininfo/isLogin',
-        params: {
-          tokenValue: localStorage.getItem("tokenValue")
-        }
-      }).then(login => {
+      isLogin(localStorage.getItem("tokenValue")).then(login => {
         if (login.data.success) {
-          axios({
-            method: 'post',
-            url: 'http://localhost:8081/dealInfo/HisoricalAll',
-            params: {
-              cardId: localStorage.getItem("cardId")
-            },
-            headers: {
-              "satoken": localStorage.getItem("tokenValue")
-            }
-          }).then(res => {
+          hisoricalAll(localStorage.getItem("cardId"), localStorage.getItem("tokenValue")).then(res => {
             this.dealList = res.data.data
           })
         } else {

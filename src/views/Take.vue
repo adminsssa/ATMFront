@@ -25,6 +25,8 @@
 
 <script>
 import axios from "axios";
+import {isLogin} from "../api/LoginInfo";
+import {withdraw} from "../api/DealInfo";
 
 export default {
   name: "take",
@@ -36,25 +38,9 @@ export default {
   methods: {
 
     withdraw() {
-      axios({
-        method: 'get',
-        url: 'http://localhost:8081/logininfo/isLogin',
-        params: {
-          tokenValue: localStorage.getItem("tokenValue")
-        }
-      }).then(login => {
+      isLogin(localStorage.getItem("tokenValue")).then(login => {
         if (login.data.success) {
-          axios({
-            method: 'post',
-            url: 'http://localhost:8081/dealInfo/Withdraw',
-            params: {
-              cardId: localStorage.getItem("cardId"),
-              transMoney: this.input
-            },
-            headers: {
-              "satoken": localStorage.getItem("tokenValue")
-            }
-          }).then(res => {
+          withdraw(localStorage.getItem("cardId"), this.input, localStorage.getItem("tokenValue")).then(res => {
             if (res.data.success) {
               this.$alert('取款成功', '消息提示', {
                 confirmButtonText: '确定',

@@ -38,25 +38,29 @@ export default {
   methods: {
 
     deposit() {
-      isLogin(localStorage.getItem("tokenValue")).then(login => {
-        if (login.data.success) {
-          deposit(localStorage.getItem("cardId"), this.input, localStorage.getItem("tokenValue")).then(res => {
-            if (res.data.success) {
-              this.$alert('存款成功', '消息提示', {
-                confirmButtonText: '确定',
-                callback: action => {
-                  this.$router.replace({path: '/homepage'})
-                }
-              });
-            } else {
-              this.$message.error(res.data.msg);
-            }
-          })
-        } else {
-          this.$message.error("登录已过期，请重新登录");
-          this.$router.replace({path: '/'})
-        }
-      })
+      if (this.input < 0) {
+        this.$message.error("存款金额不能为负数");
+      } else {
+        isLogin(localStorage.getItem("tokenValue")).then(login => {
+          if (login.data.success) {
+            deposit(localStorage.getItem("cardId"), this.input, localStorage.getItem("tokenValue")).then(res => {
+              if (res.data.success) {
+                this.$alert('存款成功', '消息提示', {
+                  confirmButtonText: '确定',
+                  callback: action => {
+                    this.$router.replace({path: '/homepage'})
+                  }
+                });
+              } else {
+                this.$message.error(res.data.msg);
+              }
+            })
+          } else {
+            this.$message.error("登录已过期，请重新登录");
+            this.$router.replace({path: '/'})
+          }
+        })
+      }
     },
     shutdown() {
       /* document.onclick = function () {

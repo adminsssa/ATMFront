@@ -5,3 +5,22 @@
     background-color: white;
     opacity: 0.7;
 }
+
+.el-table__body, .el-table__footer, .el-table__header {
+    table-layout: fixed;
+    border-collapse: separate;
+    margin-left: 10%;
+    width: 80%;
+}
+
+.el-table__body-wrapper > table {
+    width: 80%;
+}
+
+.page {
+    margin-top: 2%;
+}
+
+.el-pagination button, .el-pagination span:not([class*=suffix]) {
+    color: white;
+}

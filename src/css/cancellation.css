@@ -1,8 +1,8 @@
 #cancellationFrame{
     height: 40vh;
     width: 40vw;
-    margin-top: 30px;
-    margin-left: 50px;
+    margin-top: 2%;
+    margin-left: 6%;
 }
 #queryLayout2{
     height: 15vh;
@@ -11,20 +11,20 @@
 }
 #queryLayout3 {
     height: 12vh;
-    width: 40vw;
+    width: 50vw;
 }
 #cancellationPrompt{
     text-align: center;
 }
 #cancellationBut1{
-    width: 150px;
-    height: 50px;
+    width: 23%;
+    height: 75%;
     box-shadow: 0 15px 25px limegreen;
-    margin-left: 150px;
+    margin-left: 25%;
 }
 #cancellationBut2{
-    width: 150px;
-    height: 50px;
-    margin-left: 15px;
+    width: 23%;
+    height: 75%;
+    margin-left: 3%;
     box-shadow: 0 15px 25px orangered;
 }

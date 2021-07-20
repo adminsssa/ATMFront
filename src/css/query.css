@@ -1,8 +1,8 @@
 #queryFrame{
     height: 40vh;
     width: 40vw;
-    margin-top: 30px;
-    margin-left: 50px;
+    margin-top: 2%;
+    margin-left: 6%;
 }
 #queryLayout2{
     height: 15vh;
@@ -16,7 +16,7 @@
 #queryInput{
     margin-top: 20px;
     height: 80px;
-    width: 20vw;
+    width: 105%;
     float: left;
     margin-left: 10vw;
     font-size:30px;
@@ -31,15 +31,15 @@
     text-align: center;
 }
 #queryBut1{
-    width: 150px;
-    height: 50px;
+    width: 20%;
+    height: 65%;
     box-shadow: 0 15px 25px limegreen;
-    margin-left: 150px;
+    margin-left: 20%;
 }
 #queryBut2{
-    width: 150px;
-    height: 50px;
-    margin-left: 15px;
+    width: 20%;
+    height: 65%;
+    margin-left: 3%;
     box-shadow: 0 15px 25px orangered;
 }
 #yuan{

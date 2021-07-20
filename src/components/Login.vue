@@ -1,42 +1,26 @@
 <template>
-  <el-mentfrom id="A"
-               :model="user" :rules="rules2"
-               status-icon
-               ref="ruleForm2">
-    <div id="B">
-      <div id="B1">Login</div>
-      <table id="B2">
-        <tr>
-          <td id="username" style="width: 100px">用户名:</td>
-          <td>
-            <el-input id="usernameInput" v-model="user.username" placeholder="请输入用户名"></el-input>
-          </td>
-        </tr>
-        <tr>
-          <td id="password" style="width: 100px">密码:</td>
-          <td>
-            <el-input id="passwordInput" type="password" v-model="user.password" placeholder="请输入密码"
-                      @keydown.enter.native="doLogin"></el-input>
-            <!-- @keydown.enter.native="doLogin"当按下enter键的时候也会执行doLogin方法-->
-          </td>
-        </tr>
-        <tr>
-          <!-- 占两行-->
-          <td colspan="2">
-            <!-- 点击事件的两种不同的写法v-on:click和 @click-->
-            <!--<el-button style="width: 300px" type="primary" v-on:click="doLogin">登录</el-button>-->
-            <el-button id="loginButton" style="width: 100px" type="primary" @click="doLogin">登录</el-button>
-            <el-button id="enrollButton" style="width: 100px" type="success" @click="doenroll">注册</el-button>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </el-mentfrom>
+  <div class="login-container">
+    <el-form :model="user" :rules="rules2" status-icon ref="user" label-position="left" label-width="0px"
+             class="demo-ruleForm login-page">
+      <h3 class="title">Login</h3>
+      <el-form-item prop="username">
+        <el-input type="text" v-model="user.username" auto-complete="off" placeholder="银行卡号"></el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input type="password" v-model="user.password" auto-complete="off" placeholder="密码"></el-input>
+      </el-form-item>
+      <el-form-item style="width:100%;">
+        <el-button type="primary" style="width:90%;margin-left: 3%" @click="doLogin">登录</el-button>
+      </el-form-item>
+      <el-form-item style="width:100%;">
+        <el-button type="primary" style="width:90%;margin-left: 3%" @click="doenroll">注册</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 
 </template>
 
 <script>
-import axios from "axios";
 import {loginInfo} from "../api/LoginInfo";
 
 export default {

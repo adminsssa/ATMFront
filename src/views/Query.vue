@@ -10,11 +10,11 @@
       </el-row>
       <el-row id="queryLayout3">
         <el-col id="queryBut1">
-          <el-button type="success" icon="el-icon-success" style="width: 150px;height: 50px" v-on:click="shutdown">确定
+          <el-button type="success" icon="el-icon-success" style="width: 100%;height: 100%" v-on:click="shutdown">确定
           </el-button>
         </el-col>
         <el-col id="queryBut2">
-          <el-button type="danger" icon="el-icon-circle-close" style="width: 150px;height: 50px" v-on:click="shutdown">
+          <el-button type="danger" icon="el-icon-circle-close" style="width: 100%;height: 100%" v-on:click="shutdown">
             取消
           </el-button>
         </el-col>
@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import {isLogin} from "../api/LoginInfo";
 import {query} from "../api/CardInfo";
 

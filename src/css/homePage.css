@@ -1,90 +1,95 @@
 
-body{
+body {
     margin: 0;
     padding: 0;
     background: url("../assets/bc.png");
     font-family: sans-serif;
     background-size: cover;
 }
-#Frame{
+
+#Frame {
     height: 99vh;
     width: 100vw;
-    display : flex;
-    item-center : center;
-    border:1px solid rgba(0,0,0,0);
+    display: flex;
+    item-center: center;
+    border: 1px solid rgba(0, 0, 0, 0);
 }
-#title{
+
+#title {
     height: 20vh;
     width: 100vw;
-    display : flex;
-    item-center : center;
+    display: flex;
 }
-#first
-{
+
+#first {
     height: 20vh;
     width: 100vw;
-    display : flex;
-    item-center : center;
+    display: flex;
 }
-#second
-{
+
+#second {
     height: 20vh;
     width: 100vw;
-    display : flex;
-    item-center : center;
+    display: flex;
 }
-#third
-{
+
+#third {
     height: 20vh;
     width: 100vw;
-    display : flex;
-    item-center : center;
+    display: flex;
 }
-#prompt
-{
+
+#prompt {
     height: 20vh;
     width: 100vw;
-    display : flex;
-    item-center : center;
+    display: flex;
 }
-#title_im{
-    margin-left: 450px;
-    text-shadow: 2px 2px 5px rgba(0,0,0,100);
+
+#title_im {
+    margin-left: 30%;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 100);
     font: italic bold 40px/40px Georgia, serif;
 }
+
 #saveBut {
-    margin-top: 42px;
-    margin-left: 182px;
-    box-shadow: 0 15px 25px rgba(0,0,0,100);
+    margin-top: 9%;
+    margin-left: 25%;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 100);
 }
-#takeBut{
-    margin-top: 42px;
-    margin-left: 360px;
-    box-shadow: 0 15px 25px rgba(0,0,0,100);
+
+#takeBut {
+    margin-top: 9%;
+    margin-left: 47%;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 100);
 }
-#historyBut{
-    margin-top: 42px;
-    margin-left: 182px;
-    box-shadow: 0 15px 25px rgba(0,0,0,100);
+
+#historyBut {
+    margin-top: 9%;
+    margin-left: 25%;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 100);
 }
-#queryBut{
-    margin-top: 42px;
-    margin-left: 360px;
-    box-shadow: 0 15px 25px rgba(0,0,0,100);
+
+#queryBut {
+    margin-top: 9%;
+    margin-left: 47%;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 100);
 }
-#cancellation{
-    margin-top: 42px;
-    margin-left: 1128px;
+
+#cancellation {
+    margin-top: 4%;
+    margin-left: 73.6%;
 }
-#prompt_text{
+
+#prompt_text {
     height: 10vh;
     width: 100vw;
     margin-top: 10vh;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     border: none;
     color: red;
 }
-#index{
+
+#index {
     margin-top: 5vh;
     height: 50vh;
     width: 47vw;

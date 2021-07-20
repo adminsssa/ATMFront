@@ -6,11 +6,11 @@
       </el-row>
       <el-row id="cancellationLayout3">
         <el-col id="cancellationBut1">
-          <el-button type="success" icon="el-icon-success" style="width: 150px;height: 50px" @click="goLogin">确定
+          <el-button type="success" icon="el-icon-success" style="width: 100%;height: 100%" @click="goLogin">确定
           </el-button>
         </el-col>
         <el-col id="cancellationBut2">
-          <el-button type="danger" icon="el-icon-circle-close" style="width: 150px;height: 50px" v-on:click="shutdown">
+          <el-button type="danger" icon="el-icon-circle-close" style="width: 100%;height: 100%" v-on:click="shutdown">
             取消
           </el-button>
         </el-col>

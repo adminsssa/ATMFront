@@ -3,17 +3,18 @@
     <el-breadcrumb>
       <el-breadcrumb-item><i class="el-icon-date"></i>历史信息</el-breadcrumb-item>
     </el-breadcrumb>
-    <div class="cantainer">
-      <el-table style="width: 100%;" :data="dealList.slice((currentPage-1)*pageSize,currentPage*pageSize)">
-        <el-table-column type="index" width="120">
+    <div class="container">
+      <el-table style="width: 100%;" :data="dealList.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+                class="table">
+        <el-table-column type="index">
         </el-table-column>
-        <el-table-column label="交易金额" prop="transMoney" width="120">
+        <el-table-column label="交易金额" prop="transMoney">
         </el-table-column>
-        <el-table-column label="交易状态" prop="transType" width="120">
+        <el-table-column label="交易状态" prop="transType">
         </el-table-column>
-        <el-table-column label="交易时间" prop="transDate" width="120">
+        <el-table-column label="交易时间" prop="transDate">
         </el-table-column>
-        <el-table-column label="是否成功" prop="isSuccess" width="120">
+        <el-table-column label="是否成功" prop="isSuccess">
         </el-table-column>
       </el-table>
       <el-pagination
@@ -23,7 +24,7 @@
           :page-sizes="[5,10,20,40]"
           :page-size="pageSize"
           layout="total,sizes,prev,pager,next,jumper"
-          total="userList.length">
+          total="userList.length" class="page">
       </el-pagination>
     </div>
   </div>

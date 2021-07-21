@@ -22,6 +22,7 @@
 
 <script>
 import {loginInfo} from "../api/LoginInfo";
+import md5 from 'js-md5'
 
 export default {
   data() {
@@ -40,7 +41,8 @@ export default {
   methods: {
     doLogin() {//一点击登录按钮，这个方法就会执行
       let username = this.user.username;
-      let password = this.user.password;
+      let password = md5(this.user.password);
+      console.log(password)
       if (username === "") {
         this.$message.error("请输入银行卡号！");
       } else {

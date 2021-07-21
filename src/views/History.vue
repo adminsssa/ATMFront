@@ -45,6 +45,7 @@ export default {
     handleCurrentChange: function (currentPage) {
       this.currentPage = currentPage;
       console.log(this.currentPage)
+      console.log(this.pageSize)
     },
     handleDealList() {
       isLogin(localStorage.getItem("tokenValue")).then(login => {

@@ -24,5 +24,9 @@
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "main": "index.js",
+  "repository": "git@codeup.aliyun.com:60ecf6922f222be2d9403020/ATMFront.git",
+  "author": "zhanger <3228584061@qq.com>",
+  "license": "MIT"
 }

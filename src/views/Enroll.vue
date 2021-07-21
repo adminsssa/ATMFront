@@ -35,7 +35,7 @@
 <script>
 import md5 from 'js-md5'
 import {userRegister} from "../api/UserInfo";
-import {validateNumber} from "../api/Validate";
+import {validateIdNo, validateNumber, validatePhone} from "../api/Validate";
 
 export default {
   name: "Enroll",
@@ -52,10 +52,14 @@ export default {
       },
       rules: {
         name: [{required: true, message: "请输入姓名", trigger: 'blur'}],
-        idCard: [{required: true, message: "请输入身份证号", trigger: 'blur'}],
+        idCard: [{required: true, message: "请输入身份证号", trigger: 'blur'},{
+          required: true,
+          validator: validateIdNo,
+          trigger: 'blur'
+        }],
         telephone: [{required: true, message: "请输入联系电话", trigger: 'blur'}, {
           required: true,
-          validator: validateNumber,
+          validator: validatePhone,
           trigger: 'blur'
         }],
         address: [{required: true, message: "请输入住址", trigger: 'blur'}],

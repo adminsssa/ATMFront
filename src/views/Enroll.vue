@@ -19,8 +19,8 @@
       <el-form-item prop="cardNo">
         <el-input v-model="registerForm.cardNo" style="width: 280px" placeholder="请输入银行卡号"></el-input>
       </el-form-item>
-      <el-form-item prop="password">
-        <el-input v-model="registerForm.passwordUser" style="width: 280px" placeholder="请输入密码"></el-input>
+      <el-form-item prop="passwordUser">
+        <el-input v-model="registerForm.passwordUser" style="width: 280px" placeholder="请输入密码" type="password"></el-input>
       </el-form-item>
       <el-row id="seventhE">
         <el-button style="width: 280px" type="primary" @click="userRegister">注册</el-button>
@@ -35,6 +35,7 @@
 <script>
 import md5 from 'js-md5'
 import {userRegister} from "../api/UserInfo";
+import {validateNumber} from "../api/Validate";
 
 export default {
   name: "Enroll",
@@ -52,9 +53,17 @@ export default {
       rules: {
         name: [{required: true, message: "请输入姓名", trigger: 'blur'}],
         idCard: [{required: true, message: "请输入身份证号", trigger: 'blur'}],
-        telephone: [{required: true, message: "请输入联系电话", trigger: 'blur'}],
+        telephone: [{required: true, message: "请输入联系电话", trigger: 'blur'}, {
+          required: true,
+          validator: validateNumber,
+          trigger: 'blur'
+        }],
         address: [{required: true, message: "请输入住址", trigger: 'blur'}],
-        cardNo: [{required: true, message: "请输入银行卡号", trigger: 'blur'}],
+        cardNo: [{required: true, message: "请输入银行卡号", trigger: 'blur'}, {
+          required: true,
+          validator: validateNumber,
+          trigger: 'blur'
+        }],
         passwordUser: [{required: true, message: "请输入密码", trigger: 'blur'}],
       }
     }

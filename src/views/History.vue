@@ -26,6 +26,7 @@
           layout="total,sizes,prev,pager,next,jumper"
           total="userList.length" class="page">
       </el-pagination>
+      <el-button type="primary" @click="revert">返回</el-button>
     </div>
   </div>
 </template>
@@ -33,7 +34,7 @@
 <script>
 import axios from "axios";
 import {isLogin} from "../api/LoginInfo";
-import {hisoricalAll} from "../api/DealInfo";
+import {historicAll} from "../api/DealInfo";
 
 export default {
   name: "History",
@@ -48,13 +49,27 @@ export default {
       console.log(this.pageSize)
     },
     handleDealList() {
-      isLogin(localStorage.getItem("tokenValue")).then(login => {
+      isLogin(sessionStorage.getItem("tokenValue")).then(login => {
         if (login.data.success) {
-          hisoricalAll(localStorage.getItem("cardId"), localStorage.getItem("tokenValue")).then(res => {
+          historicAll(sessionStorage.getItem("cardId"), sessionStorage.getItem("tokenValue")).then(res => {
             this.dealList = res.data.data
           })
         } else {
+          sessionStorage.setItem("cardId", null);
+          sessionStorage.setItem("tokenValue", null);
           this.$message.error("登录已过期，请重新登录");
+          this.$router.replace({path: '/'})
+        }
+      })
+    },
+    revert(){
+      isLogin(sessionStorage.getItem("tokenValue")).then(login => {
+        if (login.data.success) {
+          this.$router.replace({path: '/homepage'})//跳转页面
+        } else {
+          this.$message.error("登录已过期，请重新登录");
+          sessionStorage.setItem("cardId", null);
+          sessionStorage.setItem("tokenValue", null);
           this.$router.replace({path: '/'})
         }
       })

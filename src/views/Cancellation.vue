@@ -30,13 +30,13 @@ export default {
   },
   methods: {
     goLogin() {
-      let tokenValue = localStorage.getItem("tokenValue")
+      let tokenValue = sessionStorage.getItem("tokenValue")
       isLogin(tokenValue).then(login => {
         if (login.data.success) {
-          userLogout(localStorage.getItem("cardId"), tokenValue).then(res => {
+          userLogout(sessionStorage.getItem("cardId"), tokenValue).then(res => {
             if (res.data.success) {
-              localStorage.setItem("cardId", null);
-              localStorage.setItem("tokenValue", null);
+              sessionStorage.setItem("cardId", null);
+              sessionStorage.setItem("tokenValue", null);
               this.$router.replace({path: '/'});
               this.$message({
                 message: '注销成功',
@@ -53,7 +53,16 @@ export default {
       })
     },
     shutdown() {
-      this.$router.replace({path: '/homepage'});
+      isLogin(sessionStorage.getItem("tokenValue")).then(login => {
+        if (login.data.success) {
+          this.$router.replace({path: '/homepage'});//跳转页面
+        } else {
+          this.$message.error("登录已过期，请重新登录");
+          sessionStorage.setItem("cardId", null);
+          sessionStorage.setItem("tokenValue", null);
+          this.$router.replace({path: '/'})
+        }
+      })
     }
   }
 }

@@ -26,14 +26,15 @@ export function validateNumber(rule, value, callback) {
  * @param callback
  */
 export function validatePhone(rule, value, callback) {
-    const reg = /^((0\d{2,3}-\d{7,8})|(1[34578]\d{9}))$/;;
+    const isMob=/^((\+?86)|(\(\+86\)))?(13[012356789][0-9]{8}|15[012356789][0-9]{8}|18[02356789][0-9]{8}|147[0-9]{8}|1349[0-9]{7})$/;
+    const isPhone = /^([2-9]{3,4}-)?[2-9]{7,8}$/;
     if (value == '' || value == undefined || value == null) {
         callback();
     } else {
-        if ((!reg.test(value)) && value != '') {
-            callback(new Error('请输入正确的电话号码或者固话号码'));
-        } else {
+        if (isMob.test(value)||isPhone.test(value)) {
             callback();
+        } else {
+            callback(new Error('请输入正确的电话号码或者固话号码'));
         }
     }
 }

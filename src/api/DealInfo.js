@@ -3,7 +3,7 @@ import axios from "axios";
 export function deposit(cardId, transMoney, tokenValue) {
     return axios({
         method: 'post',
-        url: 'http://localhost:8081/dealInfo/Deposit',
+        url: 'http://localhost:8081/dealInfo/deposit',
         params: {
             cardId,
             transMoney
@@ -17,7 +17,7 @@ export function deposit(cardId, transMoney, tokenValue) {
 export function withdraw(cardId, transMoney, tokenValue) {
     return axios({
         method: 'post',
-        url: 'http://localhost:8081/dealInfo/Withdraw',
+        url: 'http://localhost:8081/dealInfo/withdraw',
         params: {
             cardId,
             transMoney
@@ -28,10 +28,10 @@ export function withdraw(cardId, transMoney, tokenValue) {
     })
 }
 
-export function hisoricalAll(cardId, tokenValue) {
+export function historicAll(cardId, tokenValue) {
     return axios({
         method: 'post',
-        url: 'http://localhost:8081/dealInfo/HisoricalAll',
+        url: 'http://localhost:8081/dealInfo/historicAll',
         params: {
             cardId
         },

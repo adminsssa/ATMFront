@@ -39,22 +39,30 @@ export default {
   },
   methods: {
     query() {
-      isLogin(localStorage.getItem("tokenValue")).then(login => {
+      isLogin(sessionStorage.getItem("tokenValue")).then(login => {
         if (login.data.success) {
-          query(localStorage.getItem("cardId"), localStorage.getItem("tokenValue")).then(res => {
+          query(sessionStorage.getItem("cardId"), sessionStorage.getItem("tokenValue")).then(res => {
             this.input = res.data.data.balance
           })
         } else {
+          sessionStorage.setItem("cardId", null);
+          sessionStorage.setItem("tokenValue", null);
           this.$message.error("登录已过期，请重新登录");
           this.$router.replace({path: '/'})
         }
       })
     },
     shutdown() {
-      /* document.onclick = function () {
-         document.getElementById('index').style.display = 'none'
-         } 关闭Div*/
-      this.$router.replace({path: '/homepage'})//跳转页面
+      isLogin(sessionStorage.getItem("tokenValue")).then(login => {
+        if (login.data.success) {
+          this.$router.replace({path: '/homepage'})//跳转页面
+        } else {
+          this.$message.error("登录已过期，请重新登录");
+          sessionStorage.setItem("cardId", null);
+          sessionStorage.setItem("tokenValue", null);
+          this.$router.replace({path: '/'})
+        }
+      })
     }
   }
 }

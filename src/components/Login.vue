@@ -50,14 +50,13 @@ export default {
           this.$message.error("请输入密码！");
         } else {
           loginInfo(username, password).then(res => {
-            console.log(res)
             if (res.data.success) {
               this.$message({
                 message: '登录成功',
                 type: 'success'
               });
-              localStorage.setItem("cardId", username);
-              localStorage.setItem("tokenValue", res.data.data.tokenValue);
+              sessionStorage.setItem("cardId", username);
+              sessionStorage.setItem("tokenValue", res.data.data.tokenValue);
               this.$router.replace({path: '/homepage'});
             } else {
               this.$message.error(res.data.msg);

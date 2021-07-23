@@ -41,9 +41,9 @@ export default {
       if (this.input < 0) {
         this.$message.error("存款金额不能为负数");
       } else {
-        isLogin(localStorage.getItem("tokenValue")).then(login => {
+        isLogin(sessionStorage.getItem("tokenValue")).then(login => {
           if (login.data.success) {
-            deposit(localStorage.getItem("cardId"), this.input, localStorage.getItem("tokenValue")).then(res => {
+            deposit(sessionStorage.getItem("cardId"), this.input, sessionStorage.getItem("tokenValue")).then(res => {
               if (res.data.success) {
                 this.$alert('存款成功', '消息提示', {
                   confirmButtonText: '确定',
@@ -56,6 +56,8 @@ export default {
               }
             })
           } else {
+            sessionStorage.setItem("cardId", null);
+            sessionStorage.setItem("tokenValue", null);
             this.$message.error("登录已过期，请重新登录");
             this.$router.replace({path: '/'})
           }
@@ -66,7 +68,16 @@ export default {
       /* document.onclick = function () {
          document.getElementById('index').style.display = 'none'
          } 关闭Div*/
-      this.$router.replace({path: '/homepage'})
+      isLogin(sessionStorage.getItem("tokenValue")).then(login => {
+        if (login.data.success) {
+          this.$router.replace({path: '/homepage'});//跳转页面
+        } else {
+          this.$message.error("登录已过期，请重新登录");
+          sessionStorage.setItem("cardId", null);
+          sessionStorage.setItem("tokenValue", null);
+          this.$router.replace({path: '/'})
+        }
+      })
     }
   }
 }

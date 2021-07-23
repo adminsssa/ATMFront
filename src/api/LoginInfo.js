@@ -3,7 +3,7 @@ import axios from "axios";
 export function loginInfo(cardId, password) {
     return axios({
         method: 'get',
-        url: 'http://localhost:8081/logininfo/userLogin',
+        url: 'http://localhost:8081/loginInfo/userLogin',
         params: {
             cardId, password
         }
@@ -13,7 +13,7 @@ export function loginInfo(cardId, password) {
 export function isLogin(tokenValue) {
     return axios({
         method: 'get',
-        url: 'http://localhost:8081/logininfo/isLogin',
+        url: 'http://localhost:8081/loginInfo/isLogin',
         params: {
             tokenValue
         }
@@ -23,7 +23,7 @@ export function isLogin(tokenValue) {
 export function userLogout(cardId, token) {
     return axios({
         method: 'get',
-        url: "http://localhost:8081/logininfo/userLogout",
+        url: "http://localhost:8081/loginInfo/userLogout",
         params: {
             cardId,
             token

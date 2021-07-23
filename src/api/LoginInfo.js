@@ -10,11 +10,12 @@ export function loginInfo(cardId, password) {
     })
 }
 
-export function isLogin(tokenValue) {
+export function isLogin(cardId, tokenValue) {
     return axios({
         method: 'get',
         url: 'http://localhost:8081/loginInfo/isLogin',
         params: {
+            cardId,
             tokenValue
         }
     })

@@ -27,6 +27,7 @@
 import axios from "axios";
 import {isLogin} from "../api/LoginInfo";
 import {withdraw} from "../api/DealInfo";
+import {money} from "../api/Validate";
 
 export default {
   name: "take",
@@ -38,11 +39,10 @@ export default {
   methods: {
 
     withdraw() {
-      if (this.input < 0) {
-        this.$message.error("取款金额不能为负数");
-      } else {
-        isLogin(sessionStorage.getItem("tokenValue")).then(login => {
+      if (money(this.input)) {
+        isLogin(sessionStorage.getItem("cardId"), sessionStorage.getItem("tokenValue")).then(login => {
           if (login.data.success) {
+            sessionStorage.setItem("tokenValue", login.data.data.tokenValue);
             withdraw(sessionStorage.getItem("cardId"), this.input, sessionStorage.getItem("tokenValue")).then(res => {
               if (res.data.success) {
                 this.$alert('取款成功', '消息提示', {
@@ -62,12 +62,15 @@ export default {
             this.$router.replace({path: '/'})
           }
         })
+      } else {
+        this.$message.error("请输入正确金额");
       }
     },
 
     shutdown() {
-      isLogin(sessionStorage.getItem("tokenValue")).then(login => {
+      isLogin(sessionStorage.getItem("cardId"), sessionStorage.getItem("tokenValue")).then(login => {
         if (login.data.success) {
+          sessionStorage.setItem("tokenValue", login.data.data.tokenValue);
           this.$router.replace({path: '/homepage'})//跳转页面
         } else {
           this.$message.error("登录已过期，请重新登录");

@@ -39,8 +39,9 @@ export default {
   },
   methods: {
     query() {
-      isLogin(sessionStorage.getItem("tokenValue")).then(login => {
+      isLogin(sessionStorage.getItem("cardId"), sessionStorage.getItem("tokenValue")).then(login => {
         if (login.data.success) {
+          sessionStorage.setItem("tokenValue", login.data.data.tokenValue);
           query(sessionStorage.getItem("cardId"), sessionStorage.getItem("tokenValue")).then(res => {
             this.input = res.data.data.balance
           })
@@ -53,8 +54,9 @@ export default {
       })
     },
     shutdown() {
-      isLogin(sessionStorage.getItem("tokenValue")).then(login => {
+      isLogin(sessionStorage.getItem("cardId"), sessionStorage.getItem("tokenValue")).then(login => {
         if (login.data.success) {
+          sessionStorage.setItem("tokenValue", login.data.data.tokenValue);
           this.$router.replace({path: '/homepage'})//跳转页面
         } else {
           this.$message.error("登录已过期，请重新登录");

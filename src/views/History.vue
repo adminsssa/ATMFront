@@ -49,8 +49,9 @@ export default {
       console.log(this.pageSize)
     },
     handleDealList() {
-      isLogin(sessionStorage.getItem("tokenValue")).then(login => {
+      isLogin(sessionStorage.getItem("cardId"), sessionStorage.getItem("tokenValue")).then(login => {
         if (login.data.success) {
+          sessionStorage.setItem("tokenValue", login.data.data.tokenValue);
           historicAll(sessionStorage.getItem("cardId"), sessionStorage.getItem("tokenValue")).then(res => {
             this.dealList = res.data.data
           })
@@ -63,8 +64,9 @@ export default {
       })
     },
     revert(){
-      isLogin(sessionStorage.getItem("tokenValue")).then(login => {
+      isLogin(sessionStorage.getItem("cardId"), sessionStorage.getItem("tokenValue")).then(login => {
         if (login.data.success) {
+          sessionStorage.setItem("tokenValue", login.data.data.tokenValue);
           this.$router.replace({path: '/homepage'})//跳转页面
         } else {
           this.$message.error("登录已过期，请重新登录");

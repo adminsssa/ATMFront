@@ -20,10 +20,11 @@
         <el-input v-model="registerForm.cardNo" style="width: 280px" placeholder="请输入银行卡号"></el-input>
       </el-form-item>
       <el-form-item prop="passwordUser">
-        <el-input v-model="registerForm.passwordUser" style="width: 280px" placeholder="请输入密码" type="password"></el-input>
+        <el-input v-model="registerForm.passwordUser" style="width: 280px" placeholder="请输入密码"
+                  type="password"></el-input>
       </el-form-item>
       <el-row id="seventhE">
-        <el-button style="width: 280px" type="primary" @click="userRegister">注册</el-button>
+        <el-button style="width: 280px" type="primary" @click="userRegister('registerForm')">注册</el-button>
       </el-row>
       <el-row id="eighthE">
         <el-button style="width: 280px" type="danger" @click="goLogin">取消注册</el-button>
@@ -35,7 +36,13 @@
 <script>
 import md5 from 'js-md5'
 import {userRegister} from "../api/UserInfo";
-import {validateIdNo, validateNumber, validatePhone} from "../api/Validate";
+import {
+  validateCardNo,
+  validateIdNo,
+  validateName,
+  validatePassword,
+  validatePhone
+} from "../api/Validate";
 
 export default {
   name: "Enroll",
@@ -51,8 +58,12 @@ export default {
         passwordUser: null
       },
       rules: {
-        name: [{required: true, message: "请输入姓名", trigger: 'blur'}],
-        idCard: [{required: true, message: "请输入身份证号", trigger: 'blur'},{
+        name: [{required: true, message: "请输入姓名", trigger: 'blur'}, {
+          required: true,
+          validator: validateName,
+          trigger: 'blur'
+        }],
+        idCard: [{required: true, message: "请输入身份证号", trigger: 'blur'}, {
           required: true,
           validator: validateIdNo,
           trigger: 'blur'
@@ -65,52 +76,37 @@ export default {
         address: [{required: true, message: "请输入住址", trigger: 'blur'}],
         cardNo: [{required: true, message: "请输入银行卡号", trigger: 'blur'}, {
           required: true,
-          validator: validateNumber,
+          validator: validateCardNo,
           trigger: 'blur'
         }],
-        passwordUser: [{required: true, message: "请输入密码", trigger: 'blur'}],
+        passwordUser: [{required: true, message: "请输入密码", trigger: 'blur'}, {
+          required: true,
+          validator: validatePassword,
+          trigger: 'blur'
+        }],
       }
     }
   },
   methods: {
-    userRegister() {
-      if (this.registerForm.name !== null) {
-        if (this.registerForm.idCard !== null) {
-          if (this.registerForm.telephone !== null) {
-            if (this.registerForm.address !== null) {
-              if (this.registerForm.cardNo !== null) {
-                if (this.registerForm.passwordUser !== null) {
-                  this.registerForm.password = md5(this.registerForm.passwordUser);
-                  console.log(this.registerForm)
-                  userRegister(this.registerForm).then(res => {
-                    if (res.data.success) {
-                      this.$message({
-                        message: '注册成功',
-                        type: 'success'
-                      });
-                      this.$router.replace({path: '/'});
-                    } else {
-                      this.$message.error(res.data.msg);
-                    }
-                  })
-                } else {
-                  this.$message.error("请输入密码");
-                }
-              } else {
-                this.$message.error("请输入银行卡号");
-              }
+    userRegister(formName) {
+      this.$refs[formName].validate(async (valid) => {
+        if (valid) {
+          this.registerForm.password = md5(this.registerForm.passwordUser);
+          userRegister(this.registerForm).then(res => {
+            if (res.data.success) {
+              this.$message({
+                message: '注册成功',
+                type: 'success'
+              });
+              this.$router.replace({path: '/'});
             } else {
-              this.$message.error("请输入住址");
+              this.$message.error(res.data.msg);
             }
-          } else {
-            this.$message.error("请输入联系电话");
-          }
+          })
         } else {
-          this.$message.error("请输入身份证号");
+
         }
-      } else {
-        this.$message.error("请输入姓名");
-      }
+      })
     },
 
     goLogin() {

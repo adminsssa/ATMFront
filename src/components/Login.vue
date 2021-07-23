@@ -41,15 +41,14 @@ export default {
   methods: {
     doLogin() {//一点击登录按钮，这个方法就会执行
       let username = this.user.username;
-      let password = md5(this.user.password);
-      console.log(password)
+      let password = this.user.password;
       if (username === "") {
         this.$message.error("请输入银行卡号！");
       } else {
         if (password === "") {
           this.$message.error("请输入密码！");
         } else {
-          loginInfo(username, password).then(res => {
+          loginInfo(username, md5(password)).then(res => {
             if (res.data.success) {
               this.$message({
                 message: '登录成功',

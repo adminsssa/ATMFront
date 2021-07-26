@@ -6,7 +6,7 @@
       </el-row>
       <el-row id="cancellationLayout3">
         <el-col id="cancellationBut1">
-          <el-button type="success" icon="el-icon-success" style="width: 100%;height: 100%" @click="goLogin">确定
+          <el-button type="success" icon="el-icon-success" style="width: 100%;height: 100%" v-on:click="goLogin">确定
           </el-button>
         </el-col>
         <el-col id="cancellationBut2">
@@ -30,10 +30,10 @@ export default {
   },
   methods: {
     goLogin() {
-      let tokenValue = sessionStorage.getItem("tokenValue")
-      isLogin(sessionStorage.getItem("cardId"), tokenValue).then(login => {
+      isLogin(sessionStorage.getItem("cardId"), sessionStorage.getItem("tokenValue")).then(login => {
         if (login.data.success) {
-          userLogout(sessionStorage.getItem("cardId"), tokenValue).then(res => {
+          sessionStorage.setItem("tokenValue",login.data.data.tokenValue);
+          userLogout(sessionStorage.getItem("cardId"), sessionStorage.getItem("tokenValue")).then(res => {
             if (res.data.success) {
               sessionStorage.setItem("cardId", null);
               sessionStorage.setItem("tokenValue", null);
